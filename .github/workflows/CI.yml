@@ -21,16 +21,14 @@ jobs:
         with:
           python-version: '3.9'
 
-      - name: Check if dependencies are installed
-        run: |
-          if pip freeze | grep -q -f requirements.txt; then
-            echo "Dependencies already installed"
-          else
-            echo "Dependencies not found, installing..."
-            pip install -r requirements.txt
-          fi
-
       - name: Run tests
         run: |
           pytest
 
+      - name: Check if specific dependencies are installed
+        run: |
+          if pip show Flask && pip show requests; then
+            echo "Dependencies already installed"
+          else
+            echo "Dependencies not found, installing..." 
+            pip install Flask requests
