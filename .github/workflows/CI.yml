@@ -30,5 +30,6 @@ jobs:
           if pip show Flask && pip show requests; then
             echo "Dependencies already installed"
           else
-            echo "Dependencies not found, installing..." 
+            echo "Dependencies not found, installing..."
             pip install Flask requests
+          fi
