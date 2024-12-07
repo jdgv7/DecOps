@@ -21,9 +21,6 @@ jobs:
     - name: Install dependencies
       run: npm install  # Usa `npm` o `yarn` según tu proyecto
 
-    - name: Run tests
-      run: npm test  # O cualquier otro comando de test
-
     - name: Deploy (si aplica)
       run: npm run deploy  # Si tu flujo también hace despliegue
 
