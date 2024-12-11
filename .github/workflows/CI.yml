@@ -3,10 +3,10 @@ name: CI for Python with Dependency Check
 on:
   push:
     branches:
-      - develop  # Cambiar a 'develop' en lugar de 'main'
+      - main
   pull_request:
     branches:
-      - develop  # Cambiar a 'develop' en lugar de 'main'
+      - main
 
 jobs:
   build:
@@ -16,28 +16,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up JDK
-        uses: actions/setup-java@v3
+      - name: Set up Python
+        uses: actions/setup-python@v3
         with:
-          java-version: '11'  # Puedes cambiar a la versión que necesites
+          python-version: '3.9'
 
-      - name: Install dependencies and build with Maven
+      - name: Install dependencies
         run: |
-          mvn clean install
-
+          pip install pytest
       - name: Check if specific dependencies are installed
         run: |
-          if mvn dependency:tree | grep -q 'org.springframework:spring-core' && mvn dependency:tree | grep -q 'org.junit.jupiter:junit-jupiter-api'; then
-            echo "Dependencies already installed"
-          else
-            echo "Dependencies not found, installing..."
-            mvn install:install-file -Dfile=path/to/spring-core.jar -DgroupId=org.springframework -DartifactId=spring-core -Dversion=5.3.0 -Dpackaging=jar
-            mvn install:install-file -Dfile=path/to/junit-jupiter-api.jar -DgroupId=org.junit.jupiter -DartifactId=junit-jupiter-api -Dversion=5.7.1 -Dpackaging=jar
-          fi
-          
-      - name: Run tests with Maven
-        run: mvn test
-
+          if pip show Flask && pip show requests; then
             echo "Dependencies already installed"
           else
             echo "Dependencies not found, installing..."
