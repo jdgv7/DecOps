@@ -26,7 +26,7 @@ jobs:
       shell: bash -l {0}
       run: |
         conda create --name myenv python=3.8 -y
-        source activate myenv
+        conda activate myenv
 
     - name: Install dependencies
       shell: bash -l {0}
