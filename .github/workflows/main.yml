@@ -1,0 +1,32 @@
+name: CI for Ruby on Rails
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v2
+
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3.1' # Cambia a la versión que necesites
+
+    - name: Install Rails and Dependencies
+      run: |
+        gem install rails
+        rails new myapp --skip-bundle # Crea una aplicación de Rails básica para pruebas
+        cd myapp
+        bundle install
+
+    - name: Run Tests
+      run: |
+        cd myapp
+        rails test # Cambia a `rspec` si usas RSpec
+
