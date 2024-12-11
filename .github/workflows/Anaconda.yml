@@ -21,8 +21,12 @@ jobs:
 
     - name: Create and activate conda environment
       run: |
-        conda env create -f environment.yml
-        conda activate myenv  # Cambia "myenv" por el nombre de tu entorno definido en environment.yml
+        conda create --name myenv python=3.8
+        conda activate myenv
+
+    - name: Install dependencies
+      run: |
+        conda install numpy pandas scikit-learn  # Agrega más paquetes si es necesario
 
     - name: Verify environment
       run: conda list
@@ -30,3 +34,4 @@ jobs:
     - name: Clean up
       if: always()
       run: conda remove --name myenv --all
+
