@@ -19,19 +19,26 @@ jobs:
         auto-update-conda: true
         python-version: '3.8'  # Especifica la versión de Python que necesitas
 
+    - name: Initialize Conda
+      run: conda init bash
+
     - name: Create and activate conda environment
+      shell: bash -l {0}
       run: |
-        conda create --name myenv python=3.8
-        conda activate myenv
+        conda create --name myenv python=3.8 -y
+        source activate myenv
 
     - name: Install dependencies
+      shell: bash -l {0}
       run: |
-        conda install numpy pandas scikit-learn  # Agrega más paquetes si es necesario
+        conda install numpy pandas scikit-learn -y  # Agrega más paquetes si es necesario
 
     - name: Verify environment
+      shell: bash -l {0}
       run: conda list
+
 
     - name: Clean up
       if: always()
-      run: conda remove --name myenv --all
-
+      shell: bash -l {0}
+      run: conda remove --name myenv --all -y
