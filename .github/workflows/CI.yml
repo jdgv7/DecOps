@@ -1,4 +1,4 @@
-name: CI for Java with Dependency Check
+name: CI for Python with Dependency Check
 
 on:
   push:
